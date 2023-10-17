@@ -11,9 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,8 +25,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen()
+                    OnBoardingView()
                 }
+
             }
         }
     }
@@ -50,10 +53,11 @@ fun MainScreen() {
 
 
 
+@OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Pentakillpdm123Theme {
-        MainScreen()
+        OnBoardingView()
     }
 }
