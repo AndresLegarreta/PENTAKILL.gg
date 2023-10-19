@@ -20,13 +20,13 @@ import com.example.pentakillpdm123.R
 @Composable
 fun LcsCardView(){
     Box(modifier = Modifier
-        .height(40.dp)
-        .width(35.dp)
+        .height(50.dp)
+        .width(50.dp)
         .clip(RoundedCornerShape(5.dp))
-        .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(5.dp))) {
+        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(5.dp))) {
 
 
-        Image(painter = painterResource(id = R.drawable.lcs), contentDescription = "imagen", contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
+        Image(painter = painterResource(id = R.drawable.lcs), contentDescription = "imagen", contentScale = ContentScale.FillWidth, modifier = Modifier.fillMaxSize())
     }
 
 }

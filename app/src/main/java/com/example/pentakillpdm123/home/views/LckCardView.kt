@@ -3,6 +3,7 @@ package com.example.pentakillpdm123.home.views
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -20,13 +21,13 @@ import com.example.pentakillpdm123.R
 @Composable
 fun LckCardView(){
     Box(modifier = Modifier
-        .height(40.dp)
-        .width(35.dp)
+        .height(50.dp)
+        .width(50.dp)
         .clip(RoundedCornerShape(5.dp))
-        .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(5.dp))) {
+        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(5.dp))) {
 
 
-        Image(painter = painterResource(id = R.drawable.lck), contentDescription = "imagen", contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
+        Image(painter = painterResource(id = R.drawable.lck), contentDescription = "imagen", contentScale = ContentScale.FillHeight, modifier = Modifier.fillMaxSize())
     }
 
 }
