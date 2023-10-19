@@ -87,12 +87,11 @@ fun LoginScreenView() {
 
             Button(
                 onClick = {
-                    // Aquí puedes implementar la lógica de autenticación
-                    // y la navegación a la siguiente pantalla.
+
                 },
-                modifier = Modifier.width(100.dp),
+                modifier = Modifier.width(120.dp),
             ) {
-                Text("Login")
+                Text("Continue")
             }
         }
     }

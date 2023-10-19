@@ -31,6 +31,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -46,8 +47,7 @@ fun OnBoardingView() {
         OnBoardingData(
             R.drawable.aatrox,
             "",
-            "I'am not YOUR ENEMY,                                       I'am THE ENEMY.     " +
-                    "                            -Aatrox"
+            "I'am not YOUR ENEMY, I'am THE ENEMY." + "\n-Aatrox"
 
         )
     )
@@ -56,8 +56,7 @@ fun OnBoardingView() {
         OnBoardingData(
             R.drawable.kayn,
             "",
-            "I have chosen you.                                  You will serve me." +
-                    "                                       -Kayn"
+            "I have chosen you. You will serve me." + "\n-Kayn"
         )
     )
 
@@ -65,17 +64,10 @@ fun OnBoardingView() {
         OnBoardingData(
             R.drawable.pyke,
             "",
-            "I want to watch                                           the WORLD drown." +
-                    "                               -Pyke"
+            "I want to watch the WORLD drown." + "\n-Pyke"
         )
     )
-    items.add(
-        OnBoardingData(
-            R.drawable.jarvan,
-            "Title 3",
-            "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface."
-        )
-    )
+
     val pagerState = rememberPagerState(
         pageCount = items.size,
         initialOffscreenLimit = 2,
@@ -107,11 +99,9 @@ fun OnBoardingPager(
             HorizontalPager(
                 state = pagerState
             ) { page ->
-                Column(
+                Box(
                     modifier = Modifier
-                        .padding(60.dp)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxSize(),
                 ) {
                      Image(
                          painter = painterResource(id = item[page].image),
@@ -124,16 +114,16 @@ fun OnBoardingPager(
                     Text(
                         text = item[page].title,
                         modifier = Modifier.padding(top = 50.dp),
-                        color = Black,
+                        color = Color.White,
                         style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
                     )
 
                     Text(
                         text = item[page].desc,
-                        modifier = Modifier.padding(top = 30.dp, start = 20.dp, end = 20.dp),
-                        color = Black,
-                        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+                        modifier = Modifier.padding(top = 550.dp, start = 120.dp, end = 100.dp).width(200.dp),
+                        color = White,
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp
                     )
                 }
             }
@@ -215,8 +205,10 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
                     text = "Get Started",
                     modifier = Modifier
                         .padding(vertical = 8.dp, horizontal = 20.dp),
-                    color = White
-                )
+                    color = White,
+                    style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+
+                    )
             }
         } else {
             SkipNextButton(text = "Skip", modifier = Modifier.padding(start = 20.dp), pagerState)
@@ -232,7 +224,7 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
 
     Text(
         text = text,
-        color = Black,
+        color = White,
         modifier = modifier.clickable {
             if (text == "Skip") {
                 // Cambiar a la última página al hacer clic en "Skip"
