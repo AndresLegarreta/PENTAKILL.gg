@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 import androidx.navigation.compose.rememberNavController
+import com.example.pentakillpdm123.login.LoginScreenView
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    OnBoardingView()
+                    LoginScreenView()
                 }
 
             }
