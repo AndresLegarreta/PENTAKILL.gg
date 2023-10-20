@@ -74,13 +74,7 @@ fun HomeMainView(){
                     .height(90.dp)
                     .clipToBounds()
             ){
-                Row (modifier = Modifier.fillMaxSize()){
-                    MatchCardView()
-                    Spacer(modifier = Modifier.width(15.dp))
-                    Match2CardView()
-                    Spacer(modifier = Modifier.width(15.dp))
-                    Match3CardView()
-                }
+                HorizontalSliderView()
             
             }
             Spacer(modifier = Modifier.height(45.dp))
@@ -97,9 +91,7 @@ fun HomeMainView(){
                     .height(350.dp)
                     .clipToBounds()
             ){
-                MatchCardExpanded2View()
-                Spacer(modifier = Modifier.width(15.dp))
-                MatchCardExpandedView()
+                HorizontalSliderView2()
             }
 
         }
