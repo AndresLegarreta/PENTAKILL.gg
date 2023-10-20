@@ -3,25 +3,30 @@ package com.example.pentakillpdm123.home.views
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pentakillpdm123.R
 
 @Composable
-fun LeagueCardView(){
+fun WorldsCardView(){
     Box(modifier = Modifier
-        .clip(RoundedCornerShape(27.dp))
-        .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(27.dp))) {
+        .height(50.dp)
+        .width(50.dp)
+        .clip(RoundedCornerShape(5.dp))
+        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(5.dp))) {
 
 
-        Image(painter = painterResource(id = R.drawable.aatrox), contentDescription = "imagen" )
+        Image(painter = painterResource(id = R.drawable.worlds), contentDescription = "imagen", contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
     }
 
 }
@@ -29,6 +34,6 @@ fun LeagueCardView(){
 
 @Preview
 @Composable
-fun PreviewLeagueCardView(){
-    LeagueCardView()
+fun PreviewWorldsCardView(){
+    WorldsCardView()
 }
