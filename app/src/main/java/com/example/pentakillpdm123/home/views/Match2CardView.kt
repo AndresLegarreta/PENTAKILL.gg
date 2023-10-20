@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.example.pentakillpdm123.R
 
 @Composable
-fun MatchCardView(){
+fun Match2CardView(){
     Box(modifier = Modifier
         .height(50.dp)
         .width(150.dp)
@@ -26,12 +26,12 @@ fun MatchCardView(){
         .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(5.dp))) {
 
 
-        Image(painter = painterResource(id = R.drawable.match1), contentDescription = "imagen", contentScale = ContentScale.FillWidth, modifier = Modifier.fillMaxSize())
+        Image(painter = painterResource(id = R.drawable.match2), contentDescription = "imagen", contentScale = ContentScale.FillWidth, modifier = Modifier.fillMaxSize())
     }
 }
 
 @Preview
 @Composable
-fun PreviewMatchCardView(){
-    MatchCardView()
+fun PreviewMatch2CardView(){
+    Match2CardView()
 }
