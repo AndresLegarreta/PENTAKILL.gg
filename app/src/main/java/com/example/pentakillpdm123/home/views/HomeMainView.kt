@@ -1,6 +1,7 @@
 package com.example.pentakillpdm123.home.views
 
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +12,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,7 +25,9 @@ fun HomeMainView(){
     Row (modifier = Modifier.fillMaxSize()){
         Spacer(modifier = Modifier.width(20.dp))
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .clipToBounds()
         ){
             Spacer(modifier = Modifier.height(15.dp))
             Text(
@@ -62,16 +68,20 @@ fun HomeMainView(){
 
             )
             Spacer(modifier = Modifier.height(45.dp))
-            Row(
+            Box(
                 modifier= Modifier
                     .fillMaxWidth()
                     .height(50.dp)
+                    .clipToBounds()
             ){
-            MatchCardView()
-                Spacer(modifier = Modifier.width(5.dp))
-            Match2CardView()
-                Spacer(modifier = Modifier.width(5.dp))
-
+                Row (modifier = Modifier.fillMaxSize()){
+                    MatchCardView()
+                    Spacer(modifier = Modifier.width(15.dp))
+                    Match2CardView()
+                    Spacer(modifier = Modifier.width(15.dp))
+                    Match3CardView()
+                }
+            
             }
             Spacer(modifier = Modifier.height(45.dp))
             Text(
