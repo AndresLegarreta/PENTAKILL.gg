@@ -1,4 +1,4 @@
-package com.example.pentakillpdm123
+package com.example.pentakillpdm123.navigation
 
 
 sealed class NavRoutes (val route: String) {
@@ -8,3 +8,4 @@ sealed class NavRoutes (val route: String) {
     object social : NavRoutes("social")
     object profile : NavRoutes("profile")
 }
+

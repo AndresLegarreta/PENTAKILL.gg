@@ -6,8 +6,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.draggable
-import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,51 +19,80 @@ import androidx.compose.ui.unit.dp
 import com.example.pentakillpdm123.R
 import kotlin.math.roundToInt
 import androidx.compose.foundation.Image
-
+import androidx.compose.foundation.gestures.*
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.ui.draw.shadow
+import kotlin.collections.indexOf
 
 @Composable
 fun PositionChamp() {
-    val roles = listOf(
-        Role("Top-Lane", painterResource(id = R.drawable.toplane)),
-        Role("Jungler", painterResource(id = R.drawable.jungler)),
-        Role("Mid-Lane", painterResource(id = R.drawable.midlane)),
-        Role("Adc", painterResource(id = R.drawable.botlane)),
-        Role("Support", painterResource(id = R.drawable.support))
-    )
+    val roles = remember {
+        mutableStateListOf(
+            Role("Top-Lane", R.drawable.toplane),
+            Role("Jungler", R.drawable.jungler),
+            Role("Mid-Lane", R.drawable.midlane),
+            Role("Adc", R.drawable.botlane),
+            Role("Support", R.drawable.support)
+        )
+    }
 
-    val orderedRoles = remember { mutableStateOf(roles) }
-    val listState = rememberLazyListState()
+    val currentlyDragging = remember { mutableStateOf(-1) }
 
-    LazyColumn(state = listState) {
-        items(orderedRoles.value) { role ->  // <-- Usar orderedRoles.value
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxSize()
+    ) {
+        itemsIndexed(roles) { index, role ->
+
+            val isBeingDragged = currentlyDragging.value == index
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
-                    .background(Color.Gray)
+                    .background(Color.White)
+                    .run {
+                        if (isBeingDragged) {
+                            shadow(30.dp)
+                        } else {
+                            this
+                        }
+                    }
                     .draggable(
+                        orientation = Orientation.Vertical,
                         state = rememberDraggableState { delta ->
-                            // Lógica para reordenar
+                            val nextIndex = (index + if (delta < 0) -1 else 1)
+                            if (nextIndex in roles.indices) {
+                                roles.removeAt(index)
+                                roles.add(nextIndex, role)
+                                currentlyDragging.value = nextIndex
+                            }
+                        },
+                        onDragStarted = {
+                            currentlyDragging.value = index
+                        },
+                        onDragStopped = {
+                            currentlyDragging.value = -1
                         }
                     )
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(20.dp),
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    // Cambiar Icon por Image
-                    Image(painter = role.painter, contentDescription = null)
+                    Image(
+                        painter = painterResource(id = role.imageResourceId),
+                        contentDescription = null
+                    )
+
+                    Spacer(modifier = Modifier.width(20.dp))
                     Text(text = role.name)
-                    Text(text = (orderedRoles.value.indexOf(role) + 1).toString())
                 }
             }
         }
     }
 }
 
-
-data class Role(val name: String, val painter: Painter)
-
-
+data class Role(val name: String, val imageResourceId: Int)

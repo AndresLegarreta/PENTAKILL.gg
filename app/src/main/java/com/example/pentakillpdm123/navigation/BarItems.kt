@@ -1,4 +1,4 @@
-package com.example.pentakillpdm123
+package com.example.pentakillpdm123.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
