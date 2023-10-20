@@ -20,13 +20,14 @@ import com.example.pentakillpdm123.R
 @Composable
 fun Match2CardView(){
     Box(modifier = Modifier
-        .height(50.dp)
-        .width(150.dp)
+        .height(90.dp)
+        .width(180.dp)
         .clip(RoundedCornerShape(5.dp))
         .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(5.dp))) {
 
 
-        Image(painter = painterResource(id = R.drawable.match2), contentDescription = "imagen", contentScale = ContentScale.FillWidth, modifier = Modifier.fillMaxSize())
+        Image(painter = painterResource(id = R.drawable.match2),
+            contentDescription = "imagen", contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
     }
 }
 

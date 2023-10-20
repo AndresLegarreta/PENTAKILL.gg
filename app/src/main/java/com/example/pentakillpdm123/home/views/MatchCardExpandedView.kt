@@ -19,8 +19,8 @@ import com.example.pentakillpdm123.R
 @Composable
 fun MatchCardExpandedView(){
     Box(modifier = Modifier
-        .height(260.dp)
-        .width(330.dp)
+        .height(290.dp)
+        .width(360.dp)
         .clip(RoundedCornerShape(20.dp))
         .border(width = 2.dp, color = Color.White, shape = RoundedCornerShape(20.dp))) {
 

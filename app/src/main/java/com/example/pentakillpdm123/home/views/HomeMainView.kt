@@ -71,7 +71,7 @@ fun HomeMainView(){
             Box(
                 modifier= Modifier
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(90.dp)
                     .clipToBounds()
             ){
                 Row (modifier = Modifier.fillMaxSize()){
@@ -95,8 +95,11 @@ fun HomeMainView(){
                 modifier= Modifier
                     .fillMaxWidth()
                     .height(350.dp)
+                    .clipToBounds()
             ){
                 MatchCardExpanded2View()
+                Spacer(modifier = Modifier.width(15.dp))
+                MatchCardExpandedView()
             }
 
         }
