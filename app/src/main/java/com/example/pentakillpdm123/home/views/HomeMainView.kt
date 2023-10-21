@@ -19,16 +19,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pentakillpdm123.MainScreen
 
 @Composable
 fun HomeMainView(){
-    Row (modifier = Modifier.fillMaxSize()){
+
+Column (modifier = Modifier.fillMaxSize()) {
+
+
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .height(700.dp)) {
         Spacer(modifier = Modifier.width(20.dp))
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .height(700.dp)
                 .clipToBounds()
-        ){
+        ) {
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 text = "Home",
@@ -38,17 +46,17 @@ fun HomeMainView(){
             )
             Spacer(modifier = Modifier.height(5.dp))
             Row(
-                modifier= Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-            ){
+            ) {
 
                 LecCardView()
-                Spacer(modifier= Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(5.dp))
                 LckCardView()
-                Spacer(modifier= Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(5.dp))
                 LcsCardView()
-                Spacer(modifier= Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(5.dp))
                 WorldsCardView()
 
 
@@ -69,13 +77,13 @@ fun HomeMainView(){
             )
             Spacer(modifier = Modifier.height(45.dp))
             Box(
-                modifier= Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(90.dp)
                     .clipToBounds()
-            ){
+            ) {
                 HorizontalSliderView()
-            
+
             }
             Spacer(modifier = Modifier.height(45.dp))
             Text(
@@ -86,16 +94,28 @@ fun HomeMainView(){
             )
             Spacer(modifier = Modifier.height(5.dp))
             Row(
-                modifier= Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(350.dp)
                     .clipToBounds()
-            ){
+            ) {
                 HorizontalSliderView2()
             }
+            Spacer(modifier = Modifier.height(5.dp))
+            Row(modifier = Modifier.fillMaxWidth()) {
+
+            }
+
 
         }
+
+
     }
+    MainScreen()
+}
+
+
+
 
 
 
