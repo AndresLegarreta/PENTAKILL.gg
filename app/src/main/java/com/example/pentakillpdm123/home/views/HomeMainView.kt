@@ -70,7 +70,7 @@ Column (modifier = Modifier.fillMaxSize()) {
             )
             Spacer(modifier = Modifier.height(5.dp))
             Text(
-                text = "Tusday - September 19th",
+                text = "Tuesday - September 19th",
                 color = Color.Gray, // Color del texto
                 fontSize = 20.sp // Tamaño del texto en sp
 
