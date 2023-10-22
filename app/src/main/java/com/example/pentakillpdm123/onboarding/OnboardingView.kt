@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
+import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
@@ -84,6 +85,8 @@ fun OnBoardingView() {
     )
 }
 
+
+
 @ExperimentalPagerApi
 @Composable
 fun OnBoardingPager(
@@ -120,7 +123,9 @@ fun OnBoardingPager(
 
                     Text(
                         text = item[page].desc,
-                        modifier = Modifier.padding(top = 550.dp, start = 120.dp, end = 100.dp).width(200.dp),
+                        modifier = Modifier
+                            .padding(top = 550.dp, start = 120.dp, end = 100.dp)
+                            .width(200.dp),
                         color = White,
                         textAlign = TextAlign.Center,
                         fontSize = 20.sp
@@ -248,4 +253,11 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Medium
     )
+
+}
+@OptIn(ExperimentalPagerApi::class)
+@Preview
+@Composable
+fun OnboardingPreview(){
+    OnBoardingView()
 }
