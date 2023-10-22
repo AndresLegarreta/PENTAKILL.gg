@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Pentakillpdm123Theme {
                 // A surface container using the 'background' color from the theme
-                    PositionChamp()
+                    OnBoardingView()
 
             }
         }

@@ -7,5 +7,8 @@ sealed class NavRoutes (val route: String) {
     object stream : NavRoutes("stream")
     object social : NavRoutes("social")
     object profile : NavRoutes("profile")
+
+
+
 }
 
