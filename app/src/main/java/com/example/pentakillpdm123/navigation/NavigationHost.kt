@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.pentakillpdm123.navigation.NavRoutes
+import com.example.pentakillpdm123.positionchamp.PositionChamp
 
 
 @Composable
@@ -13,6 +14,9 @@ import com.example.pentakillpdm123.navigation.NavRoutes
     NavHost(navController = navController, startDestination = NavRoutes.home.route){
         composable(NavRoutes.home.route){
             com.example.pentakillpdm123.Home()
+        }
+        composable(NavRoutes.positionChamps.route){
+            PositionChamp(navController = navController)
         }
         composable(NavRoutes.news.route){
             com.example.pentakillpdm123.News()
