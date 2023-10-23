@@ -195,6 +195,8 @@ fun Indicator(isSelected: Boolean) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BottomSection(currentPager: Int, pagerState: PagerState) {
+    val coroutineScope = rememberCoroutineScope()  // <--- Asegurándonos de que coroutineScope esté disponible.
+
     Row(
         modifier = Modifier
             .padding(bottom = 80.dp)
@@ -203,7 +205,14 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
     ) {
         if (currentPager == 0) {
             OutlinedButton(
-                onClick = {pagerState},
+                onClick = {
+                    val nextPage = pagerState.currentPage + 1  // <--- Definiendo nextPage
+                    if (nextPage < pagerState.pageCount) {
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(nextPage)
+                        }
+                    }
+                },
                 shape = RoundedCornerShape(50),
             ) {
                 Text(
@@ -211,9 +220,8 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
                     modifier = Modifier
                         .padding(vertical = 8.dp, horizontal = 20.dp),
                     color = White,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
-
-                    )
+                    style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
+                )
             }
         } else {
             SkipNextButton(text = "Skip", modifier = Modifier.padding(start = 20.dp), pagerState)

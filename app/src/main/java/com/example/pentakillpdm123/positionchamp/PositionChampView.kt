@@ -118,8 +118,3 @@ fun PositionChamp(navController: NavController) {
 
 
 data class Role(val name: String, val imageResourceId: Int)
-@Preview
-@Composable
-fun PositionChampPreview(){
-    PositionChamp()
-}

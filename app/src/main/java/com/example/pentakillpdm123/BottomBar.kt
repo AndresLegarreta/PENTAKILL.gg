@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 import androidx.navigation.compose.rememberNavController
+import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.navigation.BarItems
-import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Pentakillpdm123Theme {
                 // A surface container using the 'background' color from the theme
-                    PositionChamp()
+                OnBoardingView()
 
             }
         }
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 }
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun BottomBarScreen() {
     val navController = rememberNavController()
 
     val navItems = listOf(
@@ -42,7 +42,7 @@ fun MainScreen() {
     )
     Scaffold(bottomBar = { BottomNavigation(navController = navController, items = navItems) }
     ){
-        NavigationHost(navController)
+        NavigationHost(navController = navController)
     }
 }
 
@@ -53,6 +53,6 @@ fun MainScreen() {
 @Composable
 fun DefaultPreview() {
     Pentakillpdm123Theme {
-        OnBoardingView()
+
     }
 }

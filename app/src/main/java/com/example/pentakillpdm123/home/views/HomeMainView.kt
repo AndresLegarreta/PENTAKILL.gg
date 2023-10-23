@@ -20,7 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.pentakillpdm123.MainScreen
+import com.example.pentakillpdm123.BottomBarScreen
+
 
 @Composable
 fun HomeMainView(navController: NavController){
@@ -112,7 +113,7 @@ Column (modifier = Modifier.fillMaxSize()) {
 
 
     }
-    MainScreen()
+    BottomBarScreen()
 }
 
 
@@ -121,9 +122,4 @@ Column (modifier = Modifier.fillMaxSize()) {
 
 
 
-}
-@Preview
-@Composable
-fun HomeMainPreview(){
-HomeMainView()
 }
