@@ -23,9 +23,11 @@ import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.pentakillpdm123.navigation.NavRoutes
 import kotlin.collections.indexOf
 
 @Composable
@@ -41,10 +43,14 @@ fun PositionChamp(navController: NavController) {
     }
 
     val currentlyDragging = remember { mutableStateOf(-1) }
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth().height(750.dp)
+            modifier = Modifier.fillMaxWidth().height(650.dp) // Reducir la altura un poco para dar espacio al botón.
         ) {
             itemsIndexed(roles) { index, role ->
 
@@ -90,31 +96,28 @@ fun PositionChamp(navController: NavController) {
                             contentDescription = null
                         )
 
-                        Spacer(modifier = Modifier.width(20.dp))
+                        Spacer(modifier = Modifier.width(5.dp))
                         Text(text = role.name)
                     }
                 }
             }
-
-    }
-        OutlinedButton(
-            onClick = {navController.navigate(route="homemainview")},
-            shape = RoundedCornerShape(50),
-        ) {
-            Text(
-                text = "Get Started",
-                modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 20.dp),
-                color = Color.White,
-                style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
-
-                )
         }
 
+        Spacer(modifier = Modifier.height(40.dp)) // Espacio para empujar el botón hacia arriba.
 
+        Button(
+            onClick = { navController.navigate(NavRoutes.homemainview.route) },
+            shape = RoundedCornerShape(50),
+            colors = ButtonDefaults.buttonColors(Color.Red)
+        ) {
+            Text(
+                text = "Continue",
+                modifier = Modifier.padding(vertical = 5.dp, horizontal = 20.dp),
+                color = Color.White,
+                style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
+            )
+        }
     }
 }
-
-
 
 data class Role(val name: String, val imageResourceId: Int)

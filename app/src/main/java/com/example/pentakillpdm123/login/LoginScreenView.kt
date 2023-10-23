@@ -19,10 +19,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.pentakillpdm123.R
+import com.example.pentakillpdm123.navigation.NavRoutes
 
 @Composable
-fun LoginScreenView() {
+fun LoginScreenView(navController: NavController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -87,7 +89,7 @@ fun LoginScreenView() {
 
             Button(
                 onClick = {
-
+                    navController.navigate(NavRoutes.positionchamps.route)
                 },
                 modifier = Modifier.width(120.dp),
             ) {
@@ -96,8 +98,4 @@ fun LoginScreenView() {
         }
     }
 }
-@Preview
-@Composable
-fun PreviewLoginScreenView(){
-    LoginScreenView()
-}
+

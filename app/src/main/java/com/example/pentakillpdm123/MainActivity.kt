@@ -1,4 +1,5 @@
-package com.example.pentakillpdm123.ui.theme
+package com.example.pentakillpdm123
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,12 +16,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pentakillpdm123.home.views.HomeMainView
+import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.navigation.NavRoutes
 import com.example.pentakillpdm123.positionchamp.PositionChamp
+import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnsafeOptInUsageError")
     @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,11 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
-                ) {
+                )
+                {
+                    val navController = rememberNavController()
+
+                    PositionChamp(navController = navController)
 
                 }
             }
@@ -41,26 +49,36 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
-    NavigationHost(navController = navController) }
+    NavigationHost(navController = navController)
 
+}
+
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NavigationHost(navController: NavHostController) {
-    NavHost(navController, startDestination = NavRoutes.homemainview.route) {
-        composable(NavRoutes.homemainview.route) {
-            HomeMainView(navController = navController)
-        }
-        composable(NavRoutes.positionchamps.route) {
-            PositionChamp(navController = navController)
-        }
+    val navController = rememberNavController()
 
-        // Puedes agregar más composables aquí para otras pantallas
+        NavHost(navController, startDestination = NavRoutes.onboarding.route) {
+            composable(NavRoutes.onboarding.route) {
+                OnBoardingView(navController)
+            }
+            composable(NavRoutes.homemainview.route) {
+                HomeMainView(navController)
+            }
+            composable(NavRoutes.positionchamps.route) {
+                PositionChamp(navController)
+            }
+            composable(NavRoutes.login.route) {
+                LoginScreenView(navController)
+            }
+            // Y así sucesivamente para las demás rutas...
+        }
     }
-}
-@Preview(showBackground = true)
+
+    @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Pentakillpdm123Theme {
-        MainScreen()
     }
 }

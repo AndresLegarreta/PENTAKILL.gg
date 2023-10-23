@@ -37,11 +37,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.pentakillpdm123.navigation.NavRoutes
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun OnBoardingView() {
+fun OnBoardingView(navController: NavController) {
     val items = ArrayList<OnBoardingData>()
 
     items.add(
@@ -81,7 +83,8 @@ fun OnBoardingView() {
         pagerState = pagerState,
         modifier = Modifier
             .fillMaxSize()
-            .background(color = White)
+            .background(color = White),
+        navController = navController
     )
 }
 
@@ -93,6 +96,7 @@ fun OnBoardingPager(
     item: List<OnBoardingData>,
     pagerState: PagerState,
     modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Box(modifier = modifier) {
         Column(
@@ -136,7 +140,7 @@ fun OnBoardingPager(
             PagerIndicator(item.size, pagerState.currentPage)
         }
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BottomSection(pagerState.currentPage,pagerState)
+            BottomSection(pagerState.currentPage, pagerState, navController)
         }
     }
 }
@@ -194,8 +198,8 @@ fun Indicator(isSelected: Boolean) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun BottomSection(currentPager: Int, pagerState: PagerState) {
-    val coroutineScope = rememberCoroutineScope()  // <--- Asegurándonos de que coroutineScope esté disponible.
+fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavController) {
+    val coroutineScope = rememberCoroutineScope()
 
     Row(
         modifier = Modifier
@@ -206,11 +210,14 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
         if (currentPager == 0) {
             OutlinedButton(
                 onClick = {
-                    val nextPage = pagerState.currentPage + 1  // <--- Definiendo nextPage
+                    val nextPage = pagerState.currentPage + 1
                     if (nextPage < pagerState.pageCount) {
                         coroutineScope.launch {
                             pagerState.scrollToPage(nextPage)
                         }
+                    } else {
+                        // Navega al HomeMainView cuando se ha alcanzado la última página (
+                            navController.navigate(NavRoutes.login.route)
                     }
                 },
                 shape = RoundedCornerShape(50),
@@ -225,15 +232,14 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
             }
         } else {
             SkipNextButton(text = "Skip", modifier = Modifier.padding(start = 20.dp), pagerState)
-            SkipNextButton(text = "Next", modifier = Modifier.padding(end = 20.dp), pagerState)
+            SkipNextButton(text = "Next", modifier = Modifier.padding(end = 20.dp), pagerState, currentPager,navController)
         }
     }
 }
 
-
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
+fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, currentPager: Int? = null, navController: NavController? = null) {
     val coroutineScope = rememberCoroutineScope()
 
     Text(
@@ -255,6 +261,9 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
                     coroutineScope.launch {
                         pagerState.scrollToPage(nextPage)
                     }
+                } else if (currentPager == 2 && navController != null) {
+                    // Navega a LoginScreenView cuando estés en la última página y hagas clic en "Next"
+                    navController.navigate(NavRoutes.login.route)
                 }
             }
         },
@@ -262,11 +271,5 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Medium
     )
+}
 
-}
-@OptIn(ExperimentalPagerApi::class)
-@Preview
-@Composable
-fun OnboardingPreview(){
-    OnBoardingView()
-}
