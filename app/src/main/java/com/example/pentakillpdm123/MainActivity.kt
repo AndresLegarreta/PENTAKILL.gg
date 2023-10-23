@@ -42,7 +42,7 @@ fun MainScreen() {
     )
     Scaffold(bottomBar = { BottomNavigation(navController = navController, items = navItems) }
     ){
-        NavigationHost(navController)
+        NavigationHost(navController = navController)
     }
 }
 

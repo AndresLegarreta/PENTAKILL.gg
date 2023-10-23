@@ -23,107 +23,99 @@ import androidx.navigation.NavController
 import com.example.pentakillpdm123.MainScreen
 
 @Composable
-fun HomeMainView(navController: NavController){
+fun HomeMainView(navController: NavController) {
 
-Column (modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()) {
 
 
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .height(700.dp)) {
-        Spacer(modifier = Modifier.width(20.dp))
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(700.dp)
-                .clipToBounds()
         ) {
-            Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                text = "Home",
-                color = Color.Black, // Color del texto
-                fontSize = 28.sp // Tamaño del texto en sp
-
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(
+            Spacer(modifier = Modifier.width(20.dp))
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp)
-            ) {
-
-                LecCardView()
-                Spacer(modifier = Modifier.width(5.dp))
-                LckCardView()
-                Spacer(modifier = Modifier.width(5.dp))
-                LcsCardView()
-                Spacer(modifier = Modifier.width(5.dp))
-                WorldsCardView()
-
-
-            }
-            Spacer(modifier = Modifier.height(45.dp))
-            Text(
-                text = "Today Matches",
-                color = Color.Black, // Color del texto
-                fontSize = 20.sp // Tamaño del texto en sp
-
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(
-                text = "Tuesday - September 19th",
-                color = Color.Gray, // Color del texto
-                fontSize = 20.sp // Tamaño del texto en sp
-
-            )
-            Spacer(modifier = Modifier.height(45.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(90.dp)
+                    .height(700.dp)
                     .clipToBounds()
             ) {
-                HorizontalSliderView()
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    text = "Home",
+                    color = Color.Black, // Color del texto
+                    fontSize = 28.sp // Tamaño del texto en sp
 
-            }
-            Spacer(modifier = Modifier.height(45.dp))
-            Text(
-                text = "Past Matches",
-                color = Color.Black, // Color del texto
-                fontSize = 20.sp // Tamaño del texto en sp
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                ) {
 
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(350.dp)
-                    .clipToBounds()
-            ) {
-                HorizontalSliderView2()
-            }
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(modifier = Modifier.fillMaxWidth()) {
+                    LecCardView()
+                    Spacer(modifier = Modifier.width(5.dp))
+                    LckCardView()
+                    Spacer(modifier = Modifier.width(5.dp))
+                    LcsCardView()
+                    Spacer(modifier = Modifier.width(5.dp))
+                    WorldsCardView()
+
+
+                }
+                Spacer(modifier = Modifier.height(45.dp))
+                Text(
+                    text = "Today Matches",
+                    color = Color.Black, // Color del texto
+                    fontSize = 20.sp // Tamaño del texto en sp
+
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    text = "Tuesday - September 19th",
+                    color = Color.Gray, // Color del texto
+                    fontSize = 20.sp // Tamaño del texto en sp
+
+                )
+                Spacer(modifier = Modifier.height(45.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(90.dp)
+                        .clipToBounds()
+                ) {
+                    HorizontalSliderView()
+
+                }
+                Spacer(modifier = Modifier.height(45.dp))
+                Text(
+                    text = "Past Matches",
+                    color = Color.Black, // Color del texto
+                    fontSize = 20.sp // Tamaño del texto en sp
+
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(350.dp)
+                        .clipToBounds()
+                ) {
+                    HorizontalSliderView2()
+                }
+                Spacer(modifier = Modifier.height(5.dp))
+                Row(modifier = Modifier.fillMaxWidth()) {
+
+                }
+
 
             }
 
 
         }
-
-
+        MainScreen()
     }
-    MainScreen()
-}
 
 
-
-
-
-
-
-}
-@Preview
-@Composable
-fun HomeMainPreview(){
-HomeMainView()
 }
