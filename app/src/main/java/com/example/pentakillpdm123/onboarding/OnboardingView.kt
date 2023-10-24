@@ -31,23 +31,26 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.pentakillpdm123.navigation.NavRoutes
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun OnBoardingView() {
+fun OnBoardingView(navController: NavController) {
     val items = ArrayList<OnBoardingData>()
 
     items.add(
         OnBoardingData(
             R.drawable.aatrox,
             "",
-            "I'am not YOUR ENEMY,                                       I'am THE ENEMY.     " +
-                    "                            -Aatrox"
+            "I'am not YOUR ENEMY, I'am THE ENEMY." + "\n-Aatrox"
 
         )
     )
@@ -56,8 +59,7 @@ fun OnBoardingView() {
         OnBoardingData(
             R.drawable.kayn,
             "",
-            "I have chosen you.                                  You will serve me." +
-                    "                                       -Kayn"
+            "I have chosen you. You will serve me." + "\n-Kayn"
         )
     )
 
@@ -65,17 +67,10 @@ fun OnBoardingView() {
         OnBoardingData(
             R.drawable.pyke,
             "",
-            "I want to watch                                           the WORLD drown." +
-                    "                               -Pyke"
+            "I want to watch the WORLD drown." + "\n-Pyke"
         )
     )
-    items.add(
-        OnBoardingData(
-            R.drawable.jarvan,
-            "Title 3",
-            "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface."
-        )
-    )
+
     val pagerState = rememberPagerState(
         pageCount = items.size,
         initialOffscreenLimit = 2,
@@ -88,9 +83,12 @@ fun OnBoardingView() {
         pagerState = pagerState,
         modifier = Modifier
             .fillMaxSize()
-            .background(color = White)
+            .background(color = White),
+        navController = navController
     )
 }
+
+
 
 @ExperimentalPagerApi
 @Composable
@@ -98,6 +96,7 @@ fun OnBoardingPager(
     item: List<OnBoardingData>,
     pagerState: PagerState,
     modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Box(modifier = modifier) {
         Column(
@@ -107,11 +106,9 @@ fun OnBoardingPager(
             HorizontalPager(
                 state = pagerState
             ) { page ->
-                Column(
+                Box(
                     modifier = Modifier
-                        .padding(60.dp)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxSize(),
                 ) {
                      Image(
                          painter = painterResource(id = item[page].image),
@@ -124,16 +121,18 @@ fun OnBoardingPager(
                     Text(
                         text = item[page].title,
                         modifier = Modifier.padding(top = 50.dp),
-                        color = Black,
+                        color = Color.White,
                         style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
                     )
 
                     Text(
                         text = item[page].desc,
-                        modifier = Modifier.padding(top = 30.dp, start = 20.dp, end = 20.dp),
-                        color = Black,
-                        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+                        modifier = Modifier
+                            .padding(top = 550.dp, start = 120.dp, end = 100.dp)
+                            .width(200.dp),
+                        color = White,
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp
                     )
                 }
             }
@@ -141,7 +140,7 @@ fun OnBoardingPager(
             PagerIndicator(item.size, pagerState.currentPage)
         }
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BottomSection(pagerState.currentPage,pagerState)
+            BottomSection(pagerState.currentPage, pagerState, navController)
         }
     }
 }
@@ -199,7 +198,9 @@ fun Indicator(isSelected: Boolean) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun BottomSection(currentPager: Int, pagerState: PagerState) {
+fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavController) {
+    val coroutineScope = rememberCoroutineScope()
+
     Row(
         modifier = Modifier
             .padding(bottom = 80.dp)
@@ -208,31 +209,42 @@ fun BottomSection(currentPager: Int, pagerState: PagerState) {
     ) {
         if (currentPager == 0) {
             OutlinedButton(
-                onClick = {pagerState},
+                onClick = {
+                    val nextPage = pagerState.currentPage + 1
+                    if (nextPage < pagerState.pageCount) {
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(nextPage)
+                        }
+                    } else {
+                        // Navega al HomeMainView cuando se ha alcanzado la última página (
+                            navController.navigate(NavRoutes.login.route)
+                    }
+                },
                 shape = RoundedCornerShape(50),
             ) {
                 Text(
                     text = "Get Started",
                     modifier = Modifier
                         .padding(vertical = 8.dp, horizontal = 20.dp),
-                    color = White
+                    color = White,
+                    style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
                 )
             }
         } else {
             SkipNextButton(text = "Skip", modifier = Modifier.padding(start = 20.dp), pagerState)
-            SkipNextButton(text = "Next", modifier = Modifier.padding(end = 20.dp), pagerState)
+            SkipNextButton(text = "Next", modifier = Modifier.padding(end = 20.dp), pagerState, currentPager,navController)
         }
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
+fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, currentPager: Int? = null, navController: NavController? = null) {
     val coroutineScope = rememberCoroutineScope()
 
     Text(
         text = text,
-        color = Black,
+        color = White,
         modifier = modifier.clickable {
             if (text == "Skip") {
                 // Cambiar a la última página al hacer clic en "Skip"
@@ -249,6 +261,9 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
                     coroutineScope.launch {
                         pagerState.scrollToPage(nextPage)
                     }
+                } else if (currentPager == 2 && navController != null) {
+                    // Navega a LoginScreenView cuando estés en la última página y hagas clic en "Next"
+                    navController.navigate(NavRoutes.login.route)
                 }
             }
         },
@@ -257,3 +272,4 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState) {
         fontWeight = FontWeight.Medium
     )
 }
+
