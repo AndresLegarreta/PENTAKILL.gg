@@ -32,7 +32,7 @@ fun HomeMainView(navController: NavController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(700.dp)
+                .height(740.dp)
         ) {
             Spacer(modifier = Modifier.width(20.dp))
             Column(
@@ -113,8 +113,9 @@ fun HomeMainView(navController: NavController) {
 
             }
 
-
         }
+        BottomBarScreen()
+
     }
 
 }

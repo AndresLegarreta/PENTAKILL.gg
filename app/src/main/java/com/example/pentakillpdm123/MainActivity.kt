@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 {
                     val navController = rememberNavController()
 
-                    PositionChamp(navController = navController)
+                    HomeMainView(navController = navController)
 
                 }
             }
@@ -72,7 +72,6 @@ fun NavigationHost(navController: NavHostController) {
             composable(NavRoutes.login.route) {
                 LoginScreenView(navController)
             }
-            // Y así sucesivamente para las demás rutas...
         }
     }
 

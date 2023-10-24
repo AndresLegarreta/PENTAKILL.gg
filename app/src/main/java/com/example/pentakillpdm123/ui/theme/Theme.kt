@@ -5,27 +5,28 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+
+
+val MyGray = Color(0xFFE0E0E0)
+val BlackColor = Color(0xFF000000)
+
+
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = MyGray,
+    primaryVariant = MyGray,
+    secondary = MyGray
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = MyGray,
+    primaryVariant = MyGray,
+    secondary = MyGray,
+    background = MyGray,
+    surface = MyGray
 )
+
 
 @Composable
 fun Pentakillpdm123Theme(

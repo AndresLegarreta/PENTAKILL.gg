@@ -53,13 +53,13 @@ fun PositionChamp(navController: NavController) {
             modifier = Modifier.fillMaxWidth().height(650.dp) // Reducir la altura un poco para dar espacio al botón.
         ) {
             itemsIndexed(roles) { index, role ->
-
+                val MyGray = Color(0xFFE0E0E0)
                 val isBeingDragged = currentlyDragging.value == index
 
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color.White)
+                        .background(MyGray)
                         .run {
                             if (isBeingDragged) {
                                 shadow(30.dp)
