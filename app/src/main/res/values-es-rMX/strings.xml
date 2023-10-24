@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pentakillpdm123</string>
+    <string name="home">Home</string>
+    <string name="news">Noticias</string>
+    <string name="stream">Streams</string>
+    <string name="social">Social</string>
+    <string name="profile">Perfil</string>
+    <string name="today_matches">Partidos de Hoy</string>
+    <string name="datematch">Martes - 19 de Septiembre</string>
+    <string name="pastmatch">Partidos pasados</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="contine">Continuar</string>
+    <string name="getstarted">Iniciar</string>
+    <string name="aatrox">"No soy TÚ ENEMIGO, soy ÉL ENEMIGO."   "\n-Aatrox"</string>
+    <string name="kayn">"Demostrarás ser digno?, Probablemente no"   "\n-Kayn"</string>
+    <string name="pyke">"Cada muerte aumenta el ruido de las voces y me encanta lo que gritan"   "\n-Pyke"</string>
+    <string name="next">Siguiente</string>
+    <string name="skip">Omitir</string>
+
+</resources>

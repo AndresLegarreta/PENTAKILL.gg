@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 {
                     val navController = rememberNavController()
 
-                    HomeMainView(navController = navController)
+                    OnBoardingView(navController = navController)
 
                 }
             }

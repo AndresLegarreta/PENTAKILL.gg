@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.pentakillpdm123.navigation.NavRoutes
@@ -111,7 +112,7 @@ fun PositionChamp(navController: NavController) {
             colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
             Text(
-                text = "Continue",
+                text = stringResource(id = R.string.contine),
                 modifier = Modifier.padding(vertical = 5.dp, horizontal = 20.dp),
                 color = Color.White,
                 style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
