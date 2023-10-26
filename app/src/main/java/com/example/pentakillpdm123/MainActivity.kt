@@ -38,8 +38,11 @@ class MainActivity : ComponentActivity() {
                 {
                     val navController = rememberNavController()
 
-                    OnBoardingView(navController = navController)
-
+                    Surface(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        NavigationHost(navController)
+                    }
                 }
             }
         }
@@ -71,6 +74,10 @@ fun NavigationHost(navController: NavHostController) {
             }
             composable(NavRoutes.login.route) {
                 LoginScreenView(navController)
+            }
+
+            composable(NavRoutes.news.route) {
+                Text(text = "Noticias")
             }
         }
     }

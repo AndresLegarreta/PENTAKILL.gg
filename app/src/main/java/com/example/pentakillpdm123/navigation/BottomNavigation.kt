@@ -10,35 +10,44 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.pentakillpdm123.navigation.BarItems
+import com.example.pentakillpdm123.navigation.NavBarItems
 
 @Composable
-fun BottomNavigation (navController: NavController, items: List<BarItems>) {
-    val currentRoute = currentRoute(navController)
+fun BottomNavBar(navController: NavController) {
+    BottomNavigation {
+        val backStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = backStackEntry?.destination?.route
 
-    BottomNavigation() {
-        items.forEach{ screen ->
+        NavBarItems.forEach { navItem ->
+
             BottomNavigationItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
-                label = { Text(screen.title)},
-                selected = currentRoute == screen.route,
+
+                selected = currentRoute == navItem.route,
                 onClick = {
-                    navController.navigate(screen.route){
-                        popUpTo(navController.graph.findStartDestination().id){
+                    navController.navigate(navItem.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
-
                         launchSingleTop = true
+                        restoreState = true
                     }
                 },
-                alwaysShowLabel = false
-
+                icon = {
+                    Icon(
+                        imageVector = navItem.image,
+                        contentDescription = navItem.title.toString()
+                    )
+                },
+                label = {
+                    Text(text = navItem.title)
+                }
             )
-
 
         }
     }
 }
+
+
 
 @Composable
 private fun currentRoute(navController: NavController): String? {

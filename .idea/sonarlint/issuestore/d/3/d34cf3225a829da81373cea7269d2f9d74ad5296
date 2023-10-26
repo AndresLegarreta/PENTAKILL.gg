@@ -1,0 +1,13 @@
+
+qkotlin:S117@"SRename this local variable to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(þ²ð¾8¡©“ž¶1
+>kotlin:S1128"Remove this unused import.(ˆöüºøÿÿÿÿ8Æ©“ž¶1
+8kotlin:S1128"Remove this unused import.(ô¡¶78Æ©“ž¶1
+>kotlin:S1128"Remove this unused import.(íé‚þÿÿÿÿ8Æ©“ž¶1
+8kotlin:S1128"Remove this unused import.(žËî>8Æ©“ž¶1
+9kotlin:S1128"Remove this unused import.(îšµ¢8Æ©“ž¶1
+9kotlin:S1128"Remove this unused import.(Ìä£®8Æ©“ž¶1
+>kotlin:S1128"Remove this unused import.(È¶Èøÿÿÿÿ8Ê©“ž¶1
+>kotlin:S1128"Remove this unused import.(€“ïìùÿÿÿÿ8Ï©“ž¶1
+9kotlin:S1128"Remove this unused import.(®©Ô”8Ô©“ž¶1
+9kotlin:S1128 "Remove this unused import.(ÿõ»‘8Ô©“ž¶1
+vkotlin:S3776#"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¿ò°»øÿÿÿÿ8Ú©“ž¶1

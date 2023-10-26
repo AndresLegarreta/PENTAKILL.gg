@@ -49,63 +49,69 @@ fun PositionChamp(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth().height(650.dp) // Reducir la altura un poco para dar espacio al botón.
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1.0f)
         ) {
-            itemsIndexed(roles) { index, role ->
-                val MyGray = Color(0xFFE0E0E0)
-                val isBeingDragged = currentlyDragging.value == index
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(650.dp) // Reducir la altura un poco para dar espacio al botón.
+            ) {
+                itemsIndexed(roles) { index, role ->
+                    val MyGray = Color(0xFFE0E0E0)
+                    val isBeingDragged = currentlyDragging.value == index
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MyGray)
-                        .run {
-                            if (isBeingDragged) {
-                                shadow(30.dp)
-                            } else {
-                                this
-                            }
-                        }
-                        .draggable(
-                            orientation = Orientation.Vertical,
-                            state = rememberDraggableState { delta ->
-                                val nextIndex = (index + if (delta < 0) -1 else 1)
-                                if (nextIndex in roles.indices) {
-                                    roles.removeAt(index)
-                                    roles.add(nextIndex, role)
-                                    currentlyDragging.value = nextIndex
-                                }
-                            },
-                            onDragStarted = {
-                                currentlyDragging.value = index
-                            },
-                            onDragStopped = {
-                                currentlyDragging.value = -1
-                            }
-                        )
-                ) {
-                    Row(
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp),
-                        horizontalArrangement = Arrangement.Center
+                            .background(MyGray)
+                            .run {
+                                if (isBeingDragged) {
+                                    shadow(30.dp)
+                                } else {
+                                    this
+                                }
+                            }
+                            .draggable(
+                                orientation = Orientation.Vertical,
+                                state = rememberDraggableState { delta ->
+                                    val nextIndex = (index + if (delta < 0) -1 else 1)
+                                    if (nextIndex in roles.indices) {
+                                        roles.removeAt(index)
+                                        roles.add(nextIndex, role)
+                                        currentlyDragging.value = nextIndex
+                                    }
+                                },
+                                onDragStarted = {
+                                    currentlyDragging.value = index
+                                },
+                                onDragStopped = {
+                                    currentlyDragging.value = -1
+                                }
+                            )
                     ) {
-                        Image(
-                            painter = painterResource(id = role.imageResourceId),
-                            contentDescription = null
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(20.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                painter = painterResource(id = role.imageResourceId),
+                                contentDescription = null
+                            )
 
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(text = role.name)
+                            Spacer(modifier = Modifier.width(5.dp))
+                            Text(text = role.name)
+                        }
                     }
                 }
             }
         }
-
-        Spacer(modifier = Modifier.height(40.dp)) // Espacio para empujar el botón hacia arriba.
-
+        Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = { navController.navigate(NavRoutes.homemainview.route) },
             shape = RoundedCornerShape(50),
@@ -113,12 +119,14 @@ fun PositionChamp(navController: NavController) {
         ) {
             Text(
                 text = stringResource(id = R.string.contine),
-                modifier = Modifier.padding(vertical = 5.dp, horizontal = 20.dp),
+                modifier = Modifier.padding(vertical = 5.dp, horizontal = 5.dp),
                 color = Color.White,
                 style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
             )
         }
     }
+
+
 }
 
 data class Role(val name: String, val imageResourceId: Int)
