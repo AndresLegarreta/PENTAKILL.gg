@@ -7,8 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode.Companion.Screen
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -17,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.login.LoginScreenView
+import com.example.pentakillpdm123.login.PreferencesManager
 import com.example.pentakillpdm123.navigation.NavRoutes
 import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
@@ -60,9 +64,17 @@ fun MainScreen() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NavigationHost(navController: NavHostController) {
+    val context = LocalContext.current
+    val preferencesManager = remember { PreferencesManager(context) }
     val navController = rememberNavController()
-
-        NavHost(navController, startDestination = NavRoutes.onboarding.route) {
+    val alreadyShowOnboarding = remember { mutableStateOf(preferencesManager.getData("alreadyShowOnboarding",false))}
+        NavHost(
+            navController, startDestination = if (!alreadyShowOnboarding.value) {
+            NavRoutes.onboarding.route
+        }else{
+            NavRoutes.login.route
+        }
+        ){
             composable(NavRoutes.onboarding.route) {
                 OnBoardingView(navController)
             }
