@@ -24,6 +24,7 @@ import com.example.pentakillpdm123.BottomNavBar
 import com.example.pentakillpdm123.R
 
 
+
 @Composable
 fun HomeMainView(navController: NavController) {
 
@@ -57,13 +58,17 @@ fun HomeMainView(navController: NavController) {
                                 .height(50.dp)
                         ) {
 
-                            LecCardView()
+                            val imageResourceId = R.drawable.lec
+                            LeagueCardView(imageResourceId = imageResourceId)
                             Spacer(modifier = Modifier.width(5.dp))
-                            LckCardView()
+                            val imageResourceId2 = R.drawable.lck
+                            LeagueCardView(imageResourceId = imageResourceId2)
                             Spacer(modifier = Modifier.width(5.dp))
-                            LcsCardView()
+                            val imageResourceId3 = R.drawable.lcs
+                            LeagueCardView(imageResourceId = imageResourceId3)
                             Spacer(modifier = Modifier.width(5.dp))
-                            WorldsCardView()
+                            val imageResourceId4 = R.drawable.worlds
+                            LeagueCardView(imageResourceId = imageResourceId4)
 
 
                         }
