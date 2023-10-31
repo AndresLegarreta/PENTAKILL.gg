@@ -11,29 +11,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pentakillpdm123.R
 
+data class ListItem(val imageResourceId: Int)
 @Composable
-fun WorldsCardView(){
+fun LeagueCardView(imageResourceId: Int){
     Box(modifier = Modifier
         .height(50.dp)
         .width(50.dp)
         .clip(RoundedCornerShape(5.dp))
         .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(5.dp))) {
 
+        val image: Painter = painterResource(id = imageResourceId)
+        Image(
+            painter = image,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(5.dp)),
+            contentScale = ContentScale.FillHeight
+        )
 
-        Image(painter = painterResource(id = R.drawable.worlds), contentDescription = "imagen", contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
     }
 
 }
 
 
+
+
 @Preview
 @Composable
-fun PreviewWorldsCardView(){
-    WorldsCardView()
+fun PreviewLckCardView(){
+
 }

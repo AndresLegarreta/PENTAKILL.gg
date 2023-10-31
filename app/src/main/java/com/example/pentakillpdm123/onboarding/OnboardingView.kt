@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -50,8 +51,7 @@ fun OnBoardingView(navController: NavController) {
         OnBoardingData(
             R.drawable.aatrox,
             "",
-            "I'am not YOUR ENEMY, I'am THE ENEMY." + "\n-Aatrox"
-
+            R.string.aatrox
         )
     )
 
@@ -59,7 +59,7 @@ fun OnBoardingView(navController: NavController) {
         OnBoardingData(
             R.drawable.kayn,
             "",
-            "I have chosen you. You will serve me." + "\n-Kayn"
+            R.string.kayn
         )
     )
 
@@ -67,7 +67,7 @@ fun OnBoardingView(navController: NavController) {
         OnBoardingData(
             R.drawable.pyke,
             "",
-            "I want to watch the WORLD drown." + "\n-Pyke"
+            R.string.pyke
         )
     )
 
@@ -126,7 +126,7 @@ fun OnBoardingPager(
                     )
 
                     Text(
-                        text = item[page].desc,
+                        text = stringResource(id = item[page].desc),
                         modifier = Modifier
                             .padding(top = 550.dp, start = 120.dp, end = 100.dp)
                             .width(200.dp),
@@ -223,7 +223,7 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
                 shape = RoundedCornerShape(50),
             ) {
                 Text(
-                    text = "Get Started",
+                    text = stringResource(id = R.string.getstarted),
                     modifier = Modifier
                         .padding(vertical = 8.dp, horizontal = 20.dp),
                     color = White,
@@ -231,8 +231,8 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
                 )
             }
         } else {
-            SkipNextButton(text = "Skip", modifier = Modifier.padding(start = 20.dp), pagerState)
-            SkipNextButton(text = "Next", modifier = Modifier.padding(end = 20.dp), pagerState, currentPager,navController)
+            SkipNextButton(text = stringResource(id = R.string.skip), modifier = Modifier.padding(start = 20.dp), pagerState)
+            SkipNextButton(text = stringResource(id = R.string.next), modifier = Modifier.padding(end = 20.dp), pagerState, currentPager,navController)
         }
     }
 }

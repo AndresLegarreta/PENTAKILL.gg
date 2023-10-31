@@ -5,4 +5,16 @@
     <string name="stream">Streams</string>
     <string name="social">Social</string>
     <string name="profile">Profile</string>
+    <string name="today_matches">Today Matches</string>
+    <string name="datematch">Tuesday - September 19th</string>
+    <string name="pastmatch">Past Matches</string>
+    <string name="login">Login</string>
+    <string name="contine">Continue</string>
+    <string name="getstarted">Get Started</string>
+    <string name="aatrox">"I'am not YOUR ENEMY, I'am THE ENEMY."   "\n-Aatrox"</string>
+    <string name="kayn">"I have chosen you. You will serve me."   "\n-Kayn"</string>
+    <string name="pyke">"I want to watch the WORLD drown."   "\n-Pyke"</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
 </resources>

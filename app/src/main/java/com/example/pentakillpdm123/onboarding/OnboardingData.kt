@@ -10,6 +10,6 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 
-data class OnBoardingData(val image: Int, val title: String, val desc: String)
+data class OnBoardingData(val image: Int, val title: String, val desc: Int)
 
 
