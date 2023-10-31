@@ -9,12 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.annotation.IntRange
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,11 +32,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.pentakillpdm123.login.PreferencesManager
 import com.example.pentakillpdm123.navigation.NavRoutes
 import kotlinx.coroutines.launch
 
@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnBoardingView(navController: NavController) {
     val items = ArrayList<OnBoardingData>()
+
 
     items.add(
         OnBoardingData(
@@ -216,7 +217,6 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
                             pagerState.scrollToPage(nextPage)
                         }
                     } else {
-                        // Navega al HomeMainView cuando se ha alcanzado la última página (
                             navController.navigate(NavRoutes.login.route)
                     }
                 },
@@ -241,6 +241,8 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
 @Composable
 fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, currentPager: Int? = null, navController: NavController? = null) {
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val preferencesManager = remember { PreferencesManager(context) }
 
     Text(
         text = text,
@@ -261,7 +263,8 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, cur
                     coroutineScope.launch {
                         pagerState.scrollToPage(nextPage)
                     }
-                } else if (currentPager == 2 && navController != null) {
+                } else if (currentPager == 2 && navController != null){
+                    preferencesManager.saveData("alreadyShowOnboarding", true)
                     // Navega a LoginScreenView cuando estés en la última página y hagas clic en "Next"
                     navController.navigate(NavRoutes.login.route)
                 }

@@ -52,8 +52,13 @@ fun LoginScreenView(navController: NavController) {
                 color = Color.White
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
+            Text(
+                text = stringResource(id = R.string.username),
+                fontSize = 18.sp,
+                color = Color.White
+            )
             BasicTextField(
                 value = username,
                 onValueChange = { username = it },
@@ -71,6 +76,11 @@ fun LoginScreenView(navController: NavController) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            Text(
+                text = stringResource(id = R.string.password),
+                fontSize = 18.sp,
+                color = Color.White
+            )
             BasicTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -86,7 +96,7 @@ fun LoginScreenView(navController: NavController) {
                     .padding(10.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(36.dp))
 
             Button(
                 onClick = {

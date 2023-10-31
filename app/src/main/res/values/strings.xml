@@ -16,5 +16,7 @@
     <string name="pyke">"I want to watch the WORLD drown."   "\n-Pyke"</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
 
 </resources>

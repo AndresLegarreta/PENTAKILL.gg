@@ -17,5 +17,7 @@
     <string name="pyke">"Cada muerte aumenta el ruido de las voces y me encanta lo que gritan"   "\n-Pyke"</string>
     <string name="next">Siguiente</string>
     <string name="skip">Omitir</string>
+    <string name="username">Nombre de Usuario:</string>
+    <string name="password">Contraseña:</string>
 
 </resources>
