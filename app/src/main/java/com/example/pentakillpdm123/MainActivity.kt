@@ -22,6 +22,7 @@ import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
 import com.example.pentakillpdm123.navigation.NavRoutes
+import com.example.pentakillpdm123.onboarding.LaunchScreen
 import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 
@@ -70,7 +71,7 @@ fun NavigationHost(navController: NavHostController) {
     val alreadyShowOnboarding = remember { mutableStateOf(preferencesManager.getData("alreadyShowOnboarding",false))}
         NavHost(
             navController, startDestination = if (!alreadyShowOnboarding.value) {
-            NavRoutes.onboarding.route
+            NavRoutes.launch.route
         }else{
             NavRoutes.login.route
         }
@@ -87,9 +88,11 @@ fun NavigationHost(navController: NavHostController) {
             composable(NavRoutes.login.route) {
                 LoginScreenView(navController)
             }
-
             composable(NavRoutes.news.route) {
                 Text(text = "Noticias")
+            }
+            composable(NavRoutes.launch.route) {
+                LaunchScreen(navController)
             }
         }
     }

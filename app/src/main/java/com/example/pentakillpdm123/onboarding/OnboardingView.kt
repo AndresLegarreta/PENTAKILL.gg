@@ -241,8 +241,7 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
 @Composable
 fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, currentPager: Int? = null, navController: NavController? = null) {
     val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
-    val preferencesManager = remember { PreferencesManager(context) }
+
 
     Text(
         text = text,
@@ -264,7 +263,6 @@ fun SkipNextButton(text: String, modifier: Modifier, pagerState: PagerState, cur
                         pagerState.scrollToPage(nextPage)
                     }
                 } else if (currentPager == 2 && navController != null){
-                    preferencesManager.saveData("alreadyShowOnboarding", true)
                     // Navega a LoginScreenView cuando estés en la última página y hagas clic en "Next"
                     navController.navigate(NavRoutes.login.route)
                 }
