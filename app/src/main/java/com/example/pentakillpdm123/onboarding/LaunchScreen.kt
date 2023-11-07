@@ -35,7 +35,7 @@ fun LaunchScreen(navController: NavController) {
     LaunchedEffect(key1 = Unit) {
         delay(4000)
         navController.navigate("loginscreenview") {
-            popUpTo("launchscreen") { inclusive = true } 
+            popUpTo("launchscreen") { inclusive = true }
         }
     }
 }
