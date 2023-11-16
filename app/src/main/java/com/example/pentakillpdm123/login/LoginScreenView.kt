@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,12 +23,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.pentakillpdm123.R
+import com.example.pentakillpdm123.login.model.LoginDataBody
+import com.example.pentakillpdm123.login.network.LoginViewModel
 import com.example.pentakillpdm123.navigation.NavRoutes
 
 @Composable
-fun LoginScreenView(navController: NavController) {
+fun LoginScreenView(navController: NavController,viewModel: LoginViewModel) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val loginResponse by viewModel.loginResponse.observeAsState()
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -100,7 +104,9 @@ fun LoginScreenView(navController: NavController) {
 
             Button(
                 onClick = {
-                    navController.navigate(NavRoutes.positionchamps.route)
+                    //navController.navigate(NavRoutes.positionchamps.route)
+                          viewModel.doLogin(loginData = LoginDataBody("AMLO", "p3n3" ))
+
                 },
                 modifier = Modifier.width(120.dp),
             ) {
