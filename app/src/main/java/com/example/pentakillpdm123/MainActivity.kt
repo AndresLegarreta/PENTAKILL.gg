@@ -66,9 +66,7 @@ fun MainScreen() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NavigationHost(navController: NavHostController) {
-    val leagues = listOf<LeagueModel>(
-        LeagueModel("name","","")
-    )
+
 
     val context = LocalContext.current
     val preferencesManager = remember { PreferencesManager(context) }
