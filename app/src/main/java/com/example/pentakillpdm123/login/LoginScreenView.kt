@@ -28,7 +28,7 @@ import com.example.pentakillpdm123.login.network.LoginViewModel
 import com.example.pentakillpdm123.navigation.NavRoutes
 
 @Composable
-fun LoginScreenView(navController: NavController,viewModel: LoginViewModel) {
+fun LoginScreenView(navController: NavController, viewModel: LoginViewModel) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val loginResponse by viewModel.loginResponse.observeAsState()
@@ -104,8 +104,10 @@ fun LoginScreenView(navController: NavController,viewModel: LoginViewModel) {
 
             Button(
                 onClick = {
-                    //navController.navigate(NavRoutes.positionchamps.route)
-                          viewModel.doLogin(loginData = LoginDataBody("AMLO", "p3n3" ))
+                    navController.navigate(NavRoutes.positionchamps.route)
+                          viewModel.doLogin(loginData = LoginDataBody(
+                              us = username, pass = password
+                          ))
 
                 },
                 modifier = Modifier.width(120.dp),

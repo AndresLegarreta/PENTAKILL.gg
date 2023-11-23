@@ -10,17 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.pentakillpdm123.home.model.LeagueModel
 import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
+import com.example.pentakillpdm123.login.network.LoginViewModel
 import com.example.pentakillpdm123.navigation.NavRoutes
 import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
@@ -64,6 +65,13 @@ fun MainScreen() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NavigationHost(navController: NavHostController) {
+    val leagues = listOf<LeagueModel>(
+        LeagueModel(R.drawable.lck),
+        LeagueModel(R.drawable.lcs),
+        LeagueModel(R.drawable.lec),
+        LeagueModel(R.drawable.worlds)
+    )
+
     val context = LocalContext.current
     val preferencesManager = remember { PreferencesManager(context) }
     val navController = rememberNavController()
@@ -79,13 +87,13 @@ fun NavigationHost(navController: NavHostController) {
                 OnBoardingView(navController)
             }
             composable(NavRoutes.homemainview.route) {
-                HomeMainView(navController)
+                HomeMainView(navController, leagues)
             }
             composable(NavRoutes.positionchamps.route) {
                 PositionChamp(navController)
             }
             composable(NavRoutes.login.route) {
-                LoginScreenView(navController)
+                LoginScreenView(navController, LoginViewModel())
             }
 
             composable(NavRoutes.news.route) {

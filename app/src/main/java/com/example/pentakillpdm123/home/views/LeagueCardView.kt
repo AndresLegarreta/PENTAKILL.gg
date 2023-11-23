@@ -16,17 +16,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pentakillpdm123.home.model.LeagueModel
 
-data class ListItem(val imageResourceId: Int)
+
 @Composable
-fun LeagueCardView(imageResourceId: Int){
+fun LeagueCardView(item: LeagueModel){
     Box(modifier = Modifier
         .height(50.dp)
         .width(50.dp)
         .clip(RoundedCornerShape(5.dp))
         .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(5.dp))) {
 
-        val image: Painter = painterResource(id = imageResourceId)
+        val image: Painter = painterResource(id = item.imageName)
         Image(
             painter = image,
             contentDescription = null,
