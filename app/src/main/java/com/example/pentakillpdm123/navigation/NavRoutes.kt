@@ -10,5 +10,7 @@ sealed class NavRoutes (val route: String) {
     object profile : NavRoutes("profile")
     object onboarding : NavRoutes("onboarding")
     object login : NavRoutes("loginscreenview")
+    object register : NavRoutes("registerscreenview")
+
 }
 

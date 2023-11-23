@@ -21,7 +21,9 @@ import com.example.pentakillpdm123.home.model.LeagueModel
 import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
+import com.example.pentakillpdm123.login.RegisterScreenView
 import com.example.pentakillpdm123.login.network.LoginViewModel
+import com.example.pentakillpdm123.login.register.RegisterViewModel
 import com.example.pentakillpdm123.navigation.NavRoutes
 import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
@@ -95,9 +97,11 @@ fun NavigationHost(navController: NavHostController) {
             composable(NavRoutes.login.route) {
                 LoginScreenView(navController, LoginViewModel())
             }
-
             composable(NavRoutes.news.route) {
                 Text(text = "Noticias")
+            }
+            composable(NavRoutes.register.route) {
+                RegisterScreenView(navController, RegisterViewModel())
             }
         }
     }
