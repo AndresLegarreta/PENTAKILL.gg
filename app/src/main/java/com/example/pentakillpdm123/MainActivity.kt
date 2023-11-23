@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pentakillpdm123.home.model.LeagueModel
+import com.example.pentakillpdm123.home.viewModel.HomeViewModel
 import com.example.pentakillpdm123.home.views.HomeMainView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
@@ -66,10 +67,7 @@ fun MainScreen() {
 @Composable
 fun NavigationHost(navController: NavHostController) {
     val leagues = listOf<LeagueModel>(
-        LeagueModel(R.drawable.lck),
-        LeagueModel(R.drawable.lcs),
-        LeagueModel(R.drawable.lec),
-        LeagueModel(R.drawable.worlds)
+        LeagueModel("name","","")
     )
 
     val context = LocalContext.current
@@ -87,7 +85,7 @@ fun NavigationHost(navController: NavHostController) {
                 OnBoardingView(navController)
             }
             composable(NavRoutes.homemainview.route) {
-                HomeMainView(navController, leagues)
+                HomeMainView(navController, HomeViewModel())
             }
             composable(NavRoutes.positionchamps.route) {
                 PositionChamp(navController)
