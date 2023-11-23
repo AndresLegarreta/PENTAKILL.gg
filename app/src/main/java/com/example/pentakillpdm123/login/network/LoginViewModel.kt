@@ -11,17 +11,27 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel() : ViewModel() {
     private val repository = LoginRepository()
-
+    private val _isLoginSuccessful = MutableLiveData<Boolean>()
+    val isLoginSuccessful: LiveData<Boolean> = _isLoginSuccessful
     private val _loginResponse = MutableLiveData<LoginModel>()
     val loginResponse: LiveData<LoginModel> = _loginResponse
+    private val _loginAttempted = MutableLiveData<Boolean>()
+    val loginAttempted: LiveData<Boolean> = _loginAttempted
 
     fun doLogin(loginData: LoginDataBody) {
+        _loginAttempted.value = true
         viewModelScope.launch {
             try {
                 val loginResponse = repository.doLogin(loginData)
                 _loginResponse.value = loginResponse
+                if (loginResponse.message == "login OK"){
+                    _isLoginSuccessful.value = true
+                }else {
+                    _isLoginSuccessful.value = false
+                }
             } catch (e: Exception) {
                 // Handle error
+                _isLoginSuccessful.value = false
                 Log.d("LoginViewModel", "Error: ${e.message}")
             }
         }
