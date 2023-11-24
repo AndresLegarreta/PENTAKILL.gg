@@ -8,8 +8,10 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -20,6 +22,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +44,17 @@ fun RegisterScreenView(navController: NavController, viewModel: RegisterViewMode
     val context = LocalContext.current
     val registerAttempted by viewModel.registerAttempted.observeAsState()
     var showErrorDialog by remember { mutableStateOf(false) }
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+
+    val textFieldColors = TextFieldDefaults.outlinedTextFieldColors(
+        textColor = Color.Black,
+        cursorColor = Color.Black,
+        focusedBorderColor = Color.Black,
+        unfocusedBorderColor = Color.Black.copy(alpha = ContentAlpha.disabled),
+        focusedLabelColor = Color.Black,
+        unfocusedLabelColor = Color.Black.copy(alpha = ContentAlpha.medium)
+    )
 
     LaunchedEffect(isRegisterSuccessful, registerAttempted) {
         if (registerAttempted == true) {
@@ -86,55 +101,91 @@ fun RegisterScreenView(navController: NavController, viewModel: RegisterViewMode
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.username),
-                fontSize = 18.sp,
-                color = Color.White
-            )
-            BasicTextField(
-                value = username,
-                onValueChange = { username = it },
-
-                )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = stringResource(id = R.string.password),
-                fontSize = 18.sp,
-                color = Color.White
-            )
-            BasicTextField(
-                value = password,
-                onValueChange = { password = it },
-                // Configuraciones adicionales del TextField
-                // ...
+                text = stringResource(id = R.string.register),
+                fontSize = 24.sp,
+                color = Color.Black
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
-            Text(
-                text = stringResource(id = R.string.email),
-                fontSize = 18.sp,
-                color = Color.White
-            )
-            BasicTextField(
+            OutlinedTextField(
                 value = correo,
                 onValueChange = { correo = it },
-                // Configuraciones adicionales del TextField
-                // ...
+                label = { Text(stringResource(id = R.string.email), color = Color.Black) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = stringResource(id = R.string.email),
+                        tint = Color.Black  // Establece el color del ícono aquí
+                    )
+                },
+                singleLine = true,
+                colors = textFieldColors,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { /* Handle "Next" action if needed */ }),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+
+
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text(stringResource(id = R.string.username), color = Color.Black) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = stringResource(id = R.string.username),
+                        tint = Color.Black  // Establece el color del ícono aquí
+                    )
+                },
+                singleLine = true,
+                colors = textFieldColors,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { /* Handle "Next" action if needed */ }),
+                modifier = Modifier.fillMaxWidth()
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
 
 
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(stringResource(id = R.string.password), color = Color.Black) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = stringResource(id = R.string.password),
+                        tint = Color.Black  // Establece el color del ícono aquí
+                    )
+                },
+                trailingIcon = {
+                    val image = if (passwordVisibility)
+                        Icons.Filled.Visibility
+                    else
+                        Icons.Filled.VisibilityOff
+
+                    IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                        Icon(
+                            imageVector = image,
+                            contentDescription = "Toggle password visibility",
+                            tint = Color.Black  // Establece el color del ícono aquí
+                        )
+                    }
+                },
+                singleLine = true,
+                colors = textFieldColors,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { /* Handle "Done" action if needed */ }),
+                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(36.dp))
 
 
-
-
-
-
-
-
-                Button(
+            Button(
                 onClick = {
                     viewModel.doRegister(
                         registerData = RegisterDataBody(
