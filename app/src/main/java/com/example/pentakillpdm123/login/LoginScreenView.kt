@@ -83,7 +83,7 @@ fun LoginScreenView(navController: NavController, viewModel: LoginViewModel) {
         AlertDialog(
             onDismissRequest = { showErrorDialog = false },
             title = { Text("Error") },
-            text = { Text("Error al inciar sesion") },
+            text = { Text("Error al iniciar sesion") },
             confirmButton = {
                 Button(
                     onClick = { showErrorDialog = false }
@@ -171,11 +171,15 @@ fun LoginScreenView(navController: NavController, viewModel: LoginViewModel) {
 
             Button(
                 onClick = {
-                    viewModel.doLogin(
-                        loginData = LoginDataBody(
-                            us = username, pass = password
+                    if (username.isNotBlank() && password.isNotBlank()) {
+                        viewModel.doLogin(
+                            loginData = LoginDataBody(
+                                us = username, pass = password
+                            )
                         )
-                    )
+                    }else {
+                        showErrorDialog = true
+                    }
 
                 },
                 modifier = Modifier.width(120.dp),

@@ -24,11 +24,7 @@ class LoginViewModel() : ViewModel() {
             try {
                 val loginResponse = repository.doLogin(loginData)
                 _loginResponse.value = loginResponse
-                if (loginResponse.message == "login OK"){
-                    _isLoginSuccessful.value = true
-                }else {
-                    _isLoginSuccessful.value = false
-                }
+                _isLoginSuccessful.value = loginResponse.message == "login OK"
             } catch (e: Exception) {
                 // Handle error
                 _isLoginSuccessful.value = false
