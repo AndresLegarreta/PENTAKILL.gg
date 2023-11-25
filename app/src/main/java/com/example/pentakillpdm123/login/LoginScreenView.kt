@@ -65,7 +65,7 @@ fun LoginScreenView(navController: NavController, viewModel: LoginViewModel) {
         unfocusedLabelColor = Color.Black.copy(alpha = ContentAlpha.medium)
     )
 
-    LaunchedEffect(isLoginSuccessful, loginAttempted) {
+    LaunchedEffect(isLoginSuccessful) {
         if (loginAttempted == true) {
             if (isLoginSuccessful == true) {
                 showErrorDialog = false
