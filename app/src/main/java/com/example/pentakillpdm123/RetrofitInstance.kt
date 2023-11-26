@@ -2,6 +2,7 @@ package com.example.pentakillpdm123
 
 import com.example.pentakillpdm123.home.network.LeagueService
 import com.example.pentakillpdm123.login.network.LoginService
+import com.example.pentakillpdm123.login.register.RegisterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,7 +31,13 @@ object RetrofitInstance {
     val loginService: LoginService by lazy {
         retrofit.create(LoginService::class.java)
     }
+
     val leagueService: LeagueService by lazy {
         retrofit.create(LeagueService::class.java)
+    
+    }
+    val registerService: RegisterService by lazy {
+        retrofit.create(RegisterService::class.java)
+
     }
 }

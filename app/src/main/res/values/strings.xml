@@ -16,7 +16,11 @@
     <string name="pyke">"I want to watch the WORLD drown."   "\n-Pyke"</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-    <string name="username">Username:</string>
-    <string name="password">Password:</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="registeryet">Not registered yet?</string>
+    <string name="email">Email</string>
+
 
 </resources>
