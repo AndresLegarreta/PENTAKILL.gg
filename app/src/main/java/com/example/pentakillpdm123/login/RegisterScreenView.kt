@@ -56,7 +56,7 @@ fun RegisterScreenView(navController: NavController, viewModel: RegisterViewMode
         unfocusedLabelColor = Color.Black.copy(alpha = ContentAlpha.medium)
     )
 
-    LaunchedEffect(isRegisterSuccessful, registerAttempted) {
+    LaunchedEffect(isRegisterSuccessful) {
         if (registerAttempted == true) {
             if (isRegisterSuccessful == true) {
                 showErrorDialog = false
