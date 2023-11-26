@@ -1,5 +1,6 @@
 package com.example.pentakillpdm123
 
+import com.example.pentakillpdm123.home.network.LeagueService
 import com.example.pentakillpdm123.login.network.LoginService
 import com.example.pentakillpdm123.login.register.RegisterService
 import okhttp3.OkHttpClient
@@ -9,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
     private const val BASE_URL = "https://tasty-pig-flip-flops.cyclic.app/"
+    private const val gist_URL = "https://gist.githubusercontent.com/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -29,7 +31,13 @@ object RetrofitInstance {
     val loginService: LoginService by lazy {
         retrofit.create(LoginService::class.java)
     }
+
+    val leagueService: LeagueService by lazy {
+        retrofit.create(LeagueService::class.java)
+    
+    }
     val registerService: RegisterService by lazy {
         retrofit.create(RegisterService::class.java)
+
     }
 }
