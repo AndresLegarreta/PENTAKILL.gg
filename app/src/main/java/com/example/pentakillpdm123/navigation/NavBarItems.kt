@@ -11,18 +11,18 @@ val  NavBarItems = listOf(
         route = "homemainview"
     ),
     BarItem(
-        title = "Favorites",
-        image = Icons.Filled.Favorite,
+        title = "News",
+        image = Icons.Filled.Email,
         route = "favoritesroute"
     ),
     BarItem(
-        title = "Notifications",
-        image = Icons.Filled.Notifications,
+        title = "Streams",
+        image = Icons.Filled.CellWifi,
         route = "notificationsroute"
     ),
     BarItem(
-        title = "Cart",
-        image = Icons.Filled.ShoppingCart,
-        route = "cartroute"
+        title = "Profile",
+        image = Icons.Filled.Person,
+        route = "profileroute"
     )
 )

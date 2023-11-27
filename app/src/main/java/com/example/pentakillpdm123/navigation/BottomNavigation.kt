@@ -5,6 +5,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
@@ -21,7 +22,6 @@ fun BottomNavBar(navController: NavController) {
         NavBarItems.forEach { navItem ->
 
             BottomNavigationItem(
-
                 selected = currentRoute == navItem.route,
                 onClick = {
                     navController.navigate(navItem.route) {
@@ -35,17 +35,24 @@ fun BottomNavBar(navController: NavController) {
                 icon = {
                     Icon(
                         imageVector = navItem.image,
-                        contentDescription = navItem.title.toString()
+                        contentDescription = navItem.title.toString(),
+                        tint = if (currentRoute == navItem.route) Color.Black else Color.Black // Cambiar el color del icono
                     )
                 },
                 label = {
-                    Text(text = navItem.title)
-                }
+                    Text(
+                        text = navItem.title,
+                        color = if (currentRoute == navItem.route) Color.Black else Color.Black // Cambiar el color del texto
+                    )
+                },
+                selectedContentColor = Color.Black, // Cambiar el color del contenido seleccionado
+                unselectedContentColor = Color.Black // Cambiar el color del contenido no seleccionado
             )
 
         }
     }
 }
+
 
 
 

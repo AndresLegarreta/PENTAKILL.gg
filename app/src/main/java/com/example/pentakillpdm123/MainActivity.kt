@@ -20,12 +20,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pentakillpdm123.home.model.LeagueModel
 import com.example.pentakillpdm123.home.viewModel.HomeViewModel
 import com.example.pentakillpdm123.home.views.HomeMainView
+import com.example.pentakillpdm123.home.views.ProfileView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
 import com.example.pentakillpdm123.login.RegisterScreenView
 import com.example.pentakillpdm123.login.network.LoginViewModel
 import com.example.pentakillpdm123.login.register.RegisterViewModel
 import com.example.pentakillpdm123.navigation.NavRoutes
+import com.example.pentakillpdm123.onboarding.SplashScreen
 import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 
@@ -76,7 +78,7 @@ fun NavigationHost(navController: NavHostController) {
     val alreadyShowOnboarding = remember { mutableStateOf(preferencesManager.getData("alreadyShowOnboarding",false))}
         NavHost(
             navController, startDestination = if (!alreadyShowOnboarding.value) {
-            NavRoutes.onboarding.route
+            NavRoutes.SplashView.route
         }else{
             NavRoutes.login.route
         }
@@ -98,6 +100,12 @@ fun NavigationHost(navController: NavHostController) {
             }
             composable(NavRoutes.register.route) {
                 RegisterScreenView(navController, RegisterViewModel())
+            }
+            composable(NavRoutes.SplashView.route){
+                SplashScreen(navController = navController)
+            }
+            composable(NavRoutes.profile.route){
+                ProfileView(navController = navController,context)
             }
         }
     }
