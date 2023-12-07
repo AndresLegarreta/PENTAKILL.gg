@@ -5,20 +5,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.pentakillpdm123.R
 import com.example.pentakillpdm123.navigation.NavRoutes
 import com.example.pentakillpdm123.login.PreferencesManager
@@ -35,11 +36,11 @@ fun SplashScreen(navController: NavController) {
     val alreadyShowOnboarding = remember {
         mutableStateOf(preferenceManager.getData("alreadyShowOnboarding",false))
     }
-    LaunchedEffect(key1 = "navegacion") {
-        delay(1000)
+    LaunchedEffect(key1 = "navigation") {
+        delay(2000)
 
         if (alreadyShowOnboarding.value) {
-            navController.navigate(NavRoutes.register.route) {
+            navController.navigate(NavRoutes.login.route) {
                 popUpTo(NavRoutes.SplashView.route) {
                     inclusive = true
                 }
@@ -52,20 +53,17 @@ fun SplashScreen(navController: NavController) {
             }
         }
     }
-
+    val lottieComposition by rememberLottieComposition (LottieCompositionSpec.RawRes(R.raw.animationpenta))
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.secondary)// Fondo azul claro
-            .padding(top = 200.dp)
+            .background(color = colorResource(id = R.color.white)),
+        contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logolol),
-            contentDescription = "Imagen del logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
+        LottieAnimation(
+            lottieComposition,
+            modifier = Modifier.size(450.dp)
         )
-
     }
 }
 
@@ -74,6 +72,5 @@ fun SplashScreen(navController: NavController) {
 @Composable
 fun SplashScreenPreview() {
 
-    SplashScreen(navController = rememberNavController())
 
 }

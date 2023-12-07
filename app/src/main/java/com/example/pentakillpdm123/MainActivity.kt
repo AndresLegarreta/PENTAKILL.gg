@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -32,6 +33,7 @@ import com.example.pentakillpdm123.positionchamp.PositionChamp
 import com.example.pentakillpdm123.ui.theme.Pentakillpdm123Theme
 
 import com.google.accompanist.pager.ExperimentalPagerApi
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnsafeOptInUsageError")
@@ -70,45 +72,56 @@ fun MainScreen() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NavigationHost(navController: NavHostController) {
-
-
     val context = LocalContext.current
     val preferencesManager = remember { PreferencesManager(context) }
-    val navController = rememberNavController()
-    val alreadyShowOnboarding = remember { mutableStateOf(preferencesManager.getData("alreadyShowOnboarding",false))}
-        NavHost(
-            navController, startDestination = if (!alreadyShowOnboarding.value) {
-            NavRoutes.SplashView.route
-        }else{
-            NavRoutes.login.route
+    val alreadyShowOnboarding = remember { mutableStateOf(preferencesManager.getData("alreadyShowOnboarding", false)) }
+
+    NavHost(navController, startDestination = NavRoutes.SplashView.route) {
+        composable(NavRoutes.onboarding.route) {
+            OnBoardingView(navController)
         }
-        ){
-            composable(NavRoutes.onboarding.route) {
-                OnBoardingView(navController)
+        composable(NavRoutes.homemainview.route) {
+            HomeMainView(navController, HomeViewModel())
+        }
+        composable(NavRoutes.positionchamps.route) {
+            PositionChamp(navController)
+        }
+        composable(NavRoutes.login.route) {
+            LoginScreenView(navController, LoginViewModel())
+        }
+        composable(NavRoutes.news.route) {
+            Text(text = "Noticias")
+        }
+        composable(NavRoutes.register.route) {
+            RegisterScreenView(navController, RegisterViewModel())
+        }
+        composable(NavRoutes.SplashView.route) {
+            SplashScreen(navController = navController)
+        }
+        composable(NavRoutes.profile.route) {
+            ProfileView(navController = navController, context)
+        }
+    }
+
+    // Después de mostrar el SplashScreen, decide a dónde navegar
+    LaunchedEffect(key1 = "navigation") {
+        delay(2000)
+        if (alreadyShowOnboarding.value) {
+            navController.navigate(NavRoutes.login.route) {
+                popUpTo(NavRoutes.SplashView.route) {
+                    inclusive = true
+                }
             }
-            composable(NavRoutes.homemainview.route) {
-                HomeMainView(navController, HomeViewModel())
-            }
-            composable(NavRoutes.positionchamps.route) {
-                PositionChamp(navController)
-            }
-            composable(NavRoutes.login.route) {
-                LoginScreenView(navController, LoginViewModel())
-            }
-            composable(NavRoutes.news.route) {
-                Text(text = "Noticias")
-            }
-            composable(NavRoutes.register.route) {
-                RegisterScreenView(navController, RegisterViewModel())
-            }
-            composable(NavRoutes.SplashView.route){
-                SplashScreen(navController = navController)
-            }
-            composable(NavRoutes.profile.route){
-                ProfileView(navController = navController,context)
+        } else {
+            navController.navigate(NavRoutes.onboarding.route) {
+                popUpTo(NavRoutes.SplashView.route) {
+                    inclusive = true
+                }
             }
         }
     }
+}
+
 
     @Preview(showBackground = true)
 @Composable
