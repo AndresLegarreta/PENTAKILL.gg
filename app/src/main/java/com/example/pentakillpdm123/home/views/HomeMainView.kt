@@ -28,9 +28,11 @@ import com.example.pentakillpdm123.home.viewModel.HomeViewModel
 @Composable
 fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
     val leagueCards by viewModel.leagueCards.observeAsState(emptyList())
+    val matchCards by viewModel.matchCards.observeAsState(emptyList())
 
     LaunchedEffect(Unit){
         viewModel.fetchLeagueCards()
+        viewModel.fetchMatchCards()
     }
     Scaffold(
         topBar = { TopAppBar(title = { androidx.compose.material.Text("Home") }) },
@@ -100,7 +102,24 @@ fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
                                 .height(90.dp)
                                 .clipToBounds()
                         ) {
-                            HorizontalSliderView()
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(90.dp)
+                            ){
+                                items(matchCards){
+                                        matchCard ->
+
+                                    MatchCardView(matchCard.team1,
+                                        matchCard.team2,
+                                        matchCard.team1Image,
+                                        matchCard.team2Image,
+                                        matchCard.gameName,
+                                        matchCard.teamGp,
+                                        matchCard.matchName)
+
+                                }
+                            }
 
                         }
                         Spacer(modifier = Modifier.height(45.dp))
