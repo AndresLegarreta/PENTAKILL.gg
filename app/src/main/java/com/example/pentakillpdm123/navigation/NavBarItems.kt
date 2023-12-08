@@ -13,7 +13,7 @@ val  NavBarItems = listOf(
     BarItem(
         title = "News",
         image = Icons.Filled.Email,
-        route = "favoritesroute"
+        route = "newsroute"
     ),
     BarItem(
         title = "Streams",

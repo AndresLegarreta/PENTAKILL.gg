@@ -29,10 +29,12 @@ import com.example.pentakillpdm123.home.viewModel.HomeViewModel
 fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
     val leagueCards by viewModel.leagueCards.observeAsState(emptyList())
     val matchCards by viewModel.matchCards.observeAsState(emptyList())
+    val matchesExCard by viewModel.matchExCards.observeAsState(emptyList())
 
     LaunchedEffect(Unit){
         viewModel.fetchLeagueCards()
         viewModel.fetchMatchCards()
+        viewModel.fetchMatchExCards()
     }
     Scaffold(
         topBar = { TopAppBar(title = { androidx.compose.material.Text("Home") }) },
@@ -81,7 +83,7 @@ fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
 
 
                         }
-                        Spacer(modifier = Modifier.height(45.dp))
+                        Spacer(modifier = Modifier.height(15.dp))
                         Text(
                             text = stringResource(id = R.string.today_matches),
                             color = Color.Black,
@@ -105,24 +107,23 @@ fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
                             LazyRow(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(90.dp)
+                                    .height(130.dp)
                             ){
                                 items(matchCards){
                                         matchCard ->
 
-                                    MatchCardView(matchCard.team1,
-                                        matchCard.team2,
-                                        matchCard.team1Image,
+                                    MatchCardView(matchCard.team1Image,
                                         matchCard.team2Image,
+                                        matchCard.team1,
+                                        matchCard.team2,
                                         matchCard.gameName,
                                         matchCard.teamGp,
-                                        matchCard.matchName)
-
+                                        )
                                 }
                             }
 
                         }
-                        Spacer(modifier = Modifier.height(45.dp))
+                        Spacer(modifier = Modifier.height(25.dp))
                         Text(
                             text = stringResource(id = R.string.pastmatch),
                             color = Color.Black,
@@ -130,13 +131,26 @@ fun HomeMainView(navController: NavController, viewModel: HomeViewModel) {
 
                         )
                         Spacer(modifier = Modifier.height(5.dp))
-                        Row(
+                        LazyRow(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(350.dp)
                                 .clipToBounds()
                         ) {
-                            HorizontalSliderView2()
+                            items(matchesExCard){
+                                    matchExCard ->
+
+                                MatchCardExpandedView(
+                                    matchExCard.team1Image,
+                                    matchExCard.team2Image,
+                                    matchExCard.team1,
+                                    matchExCard.team2,
+                                    matchExCard.gameName,
+                                    matchExCard.teamGp,
+                                    matchExCard.matchName,
+                                    matchExCard.matchImage
+                                )
+                            }
                         }
                         Spacer(modifier = Modifier.height(5.dp))
                         Row(modifier = Modifier.fillMaxWidth()) {

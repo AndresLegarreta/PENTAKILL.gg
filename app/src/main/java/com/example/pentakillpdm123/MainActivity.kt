@@ -20,7 +20,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pentakillpdm123.home.model.LeagueModel
 import com.example.pentakillpdm123.home.viewModel.HomeViewModel
+import com.example.pentakillpdm123.home.viewModel.NewsViewModel
+import com.example.pentakillpdm123.home.views.AboutScreen
 import com.example.pentakillpdm123.home.views.HomeMainView
+import com.example.pentakillpdm123.home.views.NewsView
 import com.example.pentakillpdm123.home.views.ProfileView
 import com.example.pentakillpdm123.login.LoginScreenView
 import com.example.pentakillpdm123.login.PreferencesManager
@@ -90,7 +93,7 @@ fun NavigationHost(navController: NavHostController) {
             LoginScreenView(navController, LoginViewModel())
         }
         composable(NavRoutes.news.route) {
-            Text(text = "Noticias")
+            NewsView(navController, NewsViewModel())
         }
         composable(NavRoutes.register.route) {
             RegisterScreenView(navController, RegisterViewModel())
@@ -100,6 +103,9 @@ fun NavigationHost(navController: NavHostController) {
         }
         composable(NavRoutes.profile.route) {
             ProfileView(navController = navController, context)
+        }
+        composable(NavRoutes.aboutscreen.route) {
+            AboutScreen(navController = navController)
         }
     }
 

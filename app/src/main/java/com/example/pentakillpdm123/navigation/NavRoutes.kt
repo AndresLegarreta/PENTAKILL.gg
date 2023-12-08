@@ -4,7 +4,7 @@ package com.example.pentakillpdm123.navigation
 sealed class NavRoutes (val route: String) {
     object positionchamps : NavRoutes("positionchamps")
     object homemainview : NavRoutes("homemainview")
-    object news : NavRoutes("news")
+    object news : NavRoutes("newsroute")
     object stream : NavRoutes("stream")
     object social : NavRoutes("social")
     object profile : NavRoutes("profileroute")
@@ -12,6 +12,7 @@ sealed class NavRoutes (val route: String) {
     object login : NavRoutes("loginscreenview")
     object register : NavRoutes("registerscreenview")
     object SplashView : NavRoutes("splashview")
+    object aboutscreen : NavRoutes("aboutscreen")
 
 }
 
